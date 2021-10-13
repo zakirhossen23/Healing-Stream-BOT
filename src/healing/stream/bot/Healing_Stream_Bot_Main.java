@@ -127,19 +127,17 @@ public class Healing_Stream_Bot_Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void stopBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopBTNActionPerformed
-        // TODO add your handling code here:
+  status=false;
+  statusLBL.setText("Stopped!!!");
     }//GEN-LAST:event_stopBTNActionPerformed
 
     private void startBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBTNActionPerformed
+        try{
 
-
-        starting:
-        while (true) {
-            try {
                 statusLBL.setText("Starting...");
                 status=true;
                 AutoReg obj = new AutoReg();
-                obj.run();
+        obj.start();
 
             } catch (Exception e) {
                 try {
@@ -151,7 +149,7 @@ public class Healing_Stream_Bot_Main extends javax.swing.JFrame {
                         "Change the chrome driver",
                         "Version error",
                         JOptionPane.INFORMATION_MESSAGE);
-                break;
+
 //           String[] sentences = e.getMessage().split("browser version is ");
 //           String[] sentences2 = sentences[1].split(" with binary");
 //System.out.println(sentences2[0]);
@@ -198,4 +196,3 @@ public class Healing_Stream_Bot_Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_startBTNActionPerformed
     // End of variables declaration                   
-}
