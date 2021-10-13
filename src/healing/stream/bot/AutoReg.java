@@ -128,7 +128,7 @@ public class AutoReg extends Thread{
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             Healing_Stream_Bot_Main.statusLBL.setText("SET...");
             Healing_Stream_Bot_Main.statusLBL.setText("going to page...");
-            driver.get("https://healingstreams.tv/3days/online_reg.php");
+            driver.get(Healing_Stream_Bot_Main.UrlTXT.getText());
             driver.findElement(By.xpath("//*[@id='button']")).click();
             nameandemail();
             Healing_Stream_Bot_Main.statusLBL.setText("Filling form...");
@@ -141,22 +141,44 @@ public class AutoReg extends Thread{
             driver.findElement(By.id("email")).click();
             driver.findElement(By.id("email")).clear();
             driver.findElement(By.id("email")).sendKeys(email);
-            driver.findElement(By.id("country1")).click();
-            int number= createRandomnumber();
 
-            new Select(driver.findElement(By.id("country1"))).selectByIndex(number);
-            driver.findElement(By.id("state1")).click();
-            new Select(driver.findElement(By.id("state1"))).selectByIndex(1);
+            int number= createRandomnumber();
+            State:
+            while (true){
+                try {
+                  driver.findElement(By.id("country1")).click();
+                  new Select(driver.findElement(By.id("country1"))).selectByIndex(number);
+                  break State;
+                }catch (Exception e){continue State;}
+            }
+
+            State:
+            while (true){
+                try {
+                    driver.findElement(By.id("state1")).click();
+                    new Select(driver.findElement(By.id("state1"))).selectByIndex(1);
+                    break State;
+                }catch (Exception e){continue State;}
+            }
+
+
             driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='State or Province (Select country first)'])[1]/following::div[2]")).click();
-            driver.findElement(By.xpath("//div[9]/form/inpur/div[5]/div/input")).clear();
-            driver.findElement(By.xpath("//div[9]/form/inpur/div[5]/div/input")).sendKeys("OELOSER");
-            driver.findElement(By.xpath("//div[9]/form/inpur/div[6]/input")).click();
+            driver.findElement(By.xpath("//div[9]/form/inpur//*[@id=\"city\"]")).clear();
+            driver.findElement(By.xpath("//div[9]/form/inpur//*[@id=\"city\"]")).sendKeys("OELOSER");
+            driver.findElement(By.xpath("//div[9]/form/inpur/div[6]/input[2]")).click();
             driver.findElement(By.id("virtual2")).click();
             driver.findElement(By.id("ptranslate2")).click();
             Healing_Stream_Bot_Main.statusLBL.setText("Done...");
             driver.findElement(By.xpath("//div[9]/form/inpur/input")).click();
 
             Healing_Stream_Bot_Main.statusLBL.setText("Filling Second Page...");
+            if (driver.getPageSource().contains("participate in the Healing Streams Live Healing")){
+                deletedone();
+                Healing_Stream_Bot_Main.statusLBL.setText("Restarting...");
+                driver.quit();
+                done=true;
+                continue;
+            }
             //2nddddddddddddddddddddddddddddddddddddd Page
             driver.findElement(By.id("gender")).click();
             new Select(driver.findElement(By.id("gender"))).selectByVisibleText("MALE");
