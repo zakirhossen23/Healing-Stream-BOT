@@ -165,7 +165,7 @@ public class AutoReg extends Thread{
             driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='State or Province (Select country first)'])[1]/following::div[2]")).click();
             driver.findElement(By.xpath("//div[9]/form/inpur//*[@id=\"city\"]")).clear();
             driver.findElement(By.xpath("//div[9]/form/inpur//*[@id=\"city\"]")).sendKeys("OELOSER");
-            driver.findElement(By.xpath("//div[9]/form/inpur/div[6]/input[2]")).click();
+            driver.findElement(By.xpath("//div[9]/form/inpur/div[7]/input[2]")).click();
             driver.findElement(By.id("virtual2")).click();
             driver.findElement(By.id("ptranslate2")).click();
             Healing_Stream_Bot_Main.statusLBL.setText("Done...");
