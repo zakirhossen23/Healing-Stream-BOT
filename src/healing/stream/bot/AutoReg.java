@@ -172,13 +172,14 @@ public class AutoReg extends Thread{
             driver.findElement(By.xpath("//div[9]/form/inpur/input")).click();
 
             Healing_Stream_Bot_Main.statusLBL.setText("Filling Second Page...");
-            if (driver.getPageSource().contains("participate in the Healing Streams Live Healing")){
+            if (driver.getPageSource().contains("participate in the Healing Streams Live Healing") || driver.getPageSource().contains("you have already registered")){
                 deletedone();
                 Healing_Stream_Bot_Main.statusLBL.setText("Restarting...");
                 driver.quit();
                 done=true;
                 continue;
             }
+            
             //2nddddddddddddddddddddddddddddddddddddd Page
             driver.findElement(By.id("gender")).click();
             new Select(driver.findElement(By.id("gender"))).selectByVisibleText("MALE");
